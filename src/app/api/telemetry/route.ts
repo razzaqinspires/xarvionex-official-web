@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+// Mencegah Prisma melakukan ping database saat Vercel sedang melakukan build
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     // Verifikasi koneksi database (Health Check)
@@ -9,7 +12,7 @@ export async function GET() {
     const systemInfo = {
       serverStatus: "ONLINE",
       environment: process.env.NODE_ENV || "development",
-      uptime: process.uptime(), // Node.js process uptime
+      uptime: process.uptime(), 
       memoryUsage: process.memoryUsage(),
       timestamp: new Date().toISOString(),
       architect: "Arifi Razzaq",

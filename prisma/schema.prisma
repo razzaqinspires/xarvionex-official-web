@@ -1,0 +1,69 @@
+// XARVIONEX Ω∞ CORE DATABASE SCHEMA
+// Engine: PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id              String         @id @default(uuid())
+  name            String
+  slug            String         @unique
+  description     String
+  status          ProjectStatus  @default(IN_DEVELOPMENT)
+  version         String         @default("1.0.0")
+  category        ProjectCategory
+  repositoryUrl   String?
+  documentationUrl String?
+  releaseDate     DateTime?
+  updateLog       String?        @db.Text
+  techStack       String[]
+  dependencies    String[]
+  license         String         @default("MIT")
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model RoadmapPhase {
+  id          Int      @id @default(autoincrement())
+  phaseNumber Int      @unique // 1 to 10
+  title       String
+  description String   @db.Text
+  isCompleted Boolean  @default(false)
+  isActive    Boolean  @default(false)
+  updatedAt   DateTime @updatedAt
+}
+
+model SystemTelemetry {
+  id            String   @id @default(uuid())
+  serverStatus  String   // ONLINE, MAINTENANCE, OFFLINE
+  uptime        Float
+  activeBots    Int
+  lastPing      DateTime @default(now())
+}
+
+enum ProjectStatus {
+  PLANNING
+  IN_DEVELOPMENT
+  BETA
+  ACTIVE
+  DEPRECATED
+}
+
+enum ProjectCategory {
+  AI
+  BOT_WA
+  BOT_DISCORD
+  BOT_TELEGRAM
+  BACKEND_API
+  AUTOMATION
+  OPEN_SOURCE
+  RESEARCH
+  DEV_TOOLS
+  INFRASTRUCTURE
+}

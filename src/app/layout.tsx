@@ -18,6 +18,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  // Mendefinisikan URL dasar untuk resolusi aset OpenGraph
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://xarvionex.com"),
   title: "XARVIONEX Ω∞ | Arifi Razzaq - Official Ecosystem",
   description: "Official digital ecosystem and technology architecture showcase by Arifi Razzaq. Exploring Software Engineering, AI, and Future Digital Infrastructure.",
   keywords: ["Arifi Razzaq", "XARVIONEX", "XARVIONEX Ω∞", "Software Engineer", "AI", "Bot WhatsApp", "Backend Architecture"],
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://xarvionex.com",
+    url: "/", 
     title: "XARVIONEX Ω∞ | Digital Architecture by Arifi Razzaq",
     description: "Official technology showcase, research center, and project hub by Arifi Razzaq.",
     siteName: "XARVIONEX Ω∞",

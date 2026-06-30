@@ -1,0 +1,38 @@
+# --- Node.js & Dependencies ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Next.js Build Artifacts ---
+.next/
+out/
+build/
+dist/
+
+# --- Environment & Secrets (CRITICAL PROTECTION) ---
+.env
+.env*.local
+.env.development
+.env.production
+.env.test
+
+# --- WhatsApp Bot Session (CRITICAL PROTECTION) ---
+# Folder ini berisi sesi login bot Anda, jangan pernah di-push!
+auth_info/
+session.json
+credentials.json
+baileys_store.json
+
+# --- Database & Editor Files ---
+prisma/dev.db
+prisma/dev.db-journal
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# --- Telemetry & Logs ---
+*.log
+npm-debug.log*
+yarn-debug.log*

@@ -1,12 +1,10 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-// Mencegah Prisma melakukan ping database saat Vercel sedang melakukan build
 export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    // Verifikasi koneksi database (Health Check)
     await prisma.$queryRaw`SELECT 1`;
 
     const systemInfo = {
@@ -20,20 +18,12 @@ export async function GET() {
     };
 
     return NextResponse.json({
-      status: "SUCCESS",
-      message: "Telemetry operational.",
-      data: systemInfo
+      status: "SUCCESS", message: "Telemetry operational.", data: systemInfo
     }, { status: 200 });
-
   } catch (error) {
-    console.error("[SYS_ERR] API /telemetry health check failed:", error);
     return NextResponse.json({
-      status: "CRITICAL",
-      message: "Database connection or core system failure.",
-      data: {
-        serverStatus: "DEGRADED",
-        timestamp: new Date().toISOString(),
-      }
+      status: "CRITICAL", message: "Database connection or core system failure.",
+      data: { serverStatus: "DEGRADED", timestamp: new Date().toISOString() }
     }, { status: 503 });
   }
 }
